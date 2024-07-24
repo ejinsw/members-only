@@ -28,7 +28,7 @@ router.post('/sign-up',
     if (!errors.isEmpty()) {
       return res.render('index', {
         title: 'Sign Up',
-        signedIn: req.user,
+        user: req.user,
         content: 'signup',
         errors: errors.array(),
         data: req.body
@@ -42,5 +42,9 @@ router.get('/code', controller.getCode)
 router.post('/code', controller.postCode)
 
 router.get('/log-out', controller.getLogout)
+
+router.get ('/write-message', controller.getWriteMessage)
+router.post ('/write-message', controller.postWriteMessage)
+router.post ('/delete-message', controller.postDeleteMessage)
 
 module.exports = router;

@@ -3,14 +3,14 @@
     <div class="flex flex-col justify-between rounded-b-lg bg-slate-50 px-4 py-2 md:m-4 md:flex-row md:items-center md:rounded-xl">
       <div class="flex items-center justify-between">
         <a href="/" aria-label="Homepage" class="text-xl font-extrabold tracking-tighter text-slate-900">
-          <% if (signedIn && signedIn.membership_active){ %>
-          Welcome Member
+          <% if (user && user.membership_active){ %>
+          Welcome <%= user.username %>
           <% } else { %>
           Members Only
           <% } %>
         </a>
       </div>
-      <% if (!signedIn) { %>
+      <% if (!user) { %>
       <div class="flex items-center justify-between">
         <a href="/log-in" aria-label="Login" class="text-l font-semibold tracking-tighter text-slate-800 rounded-lg py-1 px-2 hover:font-bold">Log In</a>
         <a href="/sign-up" aria-label="Sign up" class="text-l font-semibold tracking-tighter text-slate-800 rounded-lg py-1 px-2 hover:font-bold">Sign Up</a>
@@ -18,7 +18,7 @@
       <% } else { %>
       <div class="flex justify-center items-center">
 
-        <% if (!signedIn.membership_active) { %>
+        <% if (!user.membership_active) { %>
         <a href="/code" aria-label="Code" class="text-l font-thin tracking-tighter text-slate-800 rounded-lg py-1 px-2 hover:font-normal">123</a>
         <% } %>
         <a href="/log-out" aria-label="Logout" class="text-l font-semibold tracking-tighter text-slate-800 rounded-lg py-1 px-2 hover:font-bold">Log Out</a>

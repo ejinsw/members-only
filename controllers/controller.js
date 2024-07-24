@@ -7,11 +7,11 @@ const passport = require('../config/passport')
 exports.home = asyncHandler(async (req, res, next) => {
     const messages = await queries.getMessages();
 
-    res.render('index', { title: 'Home', signedIn: req.user, content: 'home', messages: messages });
+    res.render('index', { title: 'Home', user: req.user, content: 'home', messages: messages });
 })
 
 exports.getSignUp = asyncHandler(async (req, res, next) => {
-    res.render('index', { title: 'Sign Up', signedIn: req.user, content: 'signup', errors: false, data: req.body })
+    res.render('index', { title: 'Sign Up', user: req.user, content: 'signup', errors: false, data: req.body })
 })
 
 exports.postSignUp = asyncHandler(async (req, res, next) => {
@@ -38,14 +38,14 @@ exports.getCode = asyncHandler(async (req, res, next) => {
         res.redirect('/')
     }
 
-    res.render('index', { title: 'Enter Code', signedIn: req.user, content: 'code', inputWrongCode: false })
+    res.render('index', { title: 'Enter Code', user: req.user, content: 'code', inputWrongCode: false })
 })
 
 exports.postCode = asyncHandler(async (req, res, next) => {
     if (req.body.code === process.env.CODE) {
         queries.validateMembership(req.user.id);
     } else {
-        res.render('index', { title: 'Enter Code', signedIn: req.user, content: 'code', inputWrongCode: true })
+        res.render('index', { title: 'Enter Code', user: req.user, content: 'code', inputWrongCode: true })
     }
 
     res.redirect('/')
@@ -54,7 +54,7 @@ exports.postCode = asyncHandler(async (req, res, next) => {
 exports.getLogin = asyncHandler(async (req, res, next) => {
     const errors = req.flash('error')
 
-    res.render('index', { title: 'Login', signedIn: req.user, content: 'login', errors: errors, data: req.body })
+    res.render('index', { title: 'Login', user: req.user, content: 'login', errors: errors, data: req.body })
 })
 
 exports.postLogin = asyncHandler(async (req, res, next) => {
@@ -72,4 +72,23 @@ exports.getLogout = asyncHandler(async (req, res, next) => {
         }
         res.redirect("/");
     });
+})
+
+exports.getWriteMessage = asyncHandler(async (req, res, next) => {
+    if (!req.user) res.redirect('/')
+
+    res.render('index', { title: 'Write message', user: req.user, content: 'writeMessage' })
+})
+
+exports.postWriteMessage = asyncHandler(async (req, res, next) => {
+    if (!req.user) res.redirect('/')
+
+    await queries.addMessage(req.user.id, req.body.message);
+
+    res.redirect('/')
+})
+
+exports.postDeleteMessage = asyncHandler(async (req, res, next) => {
+    await queries.removeMessage(req.body.message)
+    res.redirect('/')
 })

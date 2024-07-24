@@ -2,12 +2,34 @@ const pool = require('./pool')
 
 async function getMessages() {
     try {
-        const messages = await pool.query('SELECT * FROM messages;')
+        const messages = await pool.query(`
+                                        SELECT 
+                                            messages.id AS messageid,
+                                            messages.content,
+                                            users.id AS userid,
+                                            users.username,
+                                            users.first_name,
+                                            users.last_name
+                                        FROM 
+                                            messages
+                                        JOIN 
+                                            users 
+                                        ON 
+                                            messages.user_id = users.id`
+        )
 
         return messages.rows
     } catch (err) {
         throw err
     }
+}
+
+async function addMessage(user, message) {
+    await pool.query('INSERT INTO messages (user_id, content) VALUES ($1, $2);', [user, message])
+}
+
+async function removeMessage(id) {
+    await pool.query('DELETE FROM messages WHERE id = $1;', [id])
 }
 
 async function getUser(username) {
@@ -32,5 +54,7 @@ module.exports = {
     getUser,
     addUser,
     getMessages,
-    validateMembership
+    validateMembership,
+    addMessage,
+    removeMessage
 }
