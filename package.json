@@ -5,7 +5,7 @@
   "scripts": {
     "build:css": "npx postcss public/stylesheets/tailwind.css -o public/build/tailwind.css",
     "watch:css": "npx tailwindcss -i ./public/stylesheets/tailwind.css -o ./public/build/tailwind.css --watch",
-    "start": "npm run build:css && node ./db/initializeDatabase && node ./bin/www",
+    "start": "npm run build:css && node ./config/db/initializeDatabase && node ./bin/www",
     "devstart": "concurrently \"npm run watch:css\" \"npm run devserver\"",
     "devserver": "node ./config/db/initializeDatabase && nodemon ./bin/www",
     "serverstart": "DEBUG=members-only:* npm run devstart"
