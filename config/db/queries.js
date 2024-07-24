@@ -24,8 +24,13 @@ async function addUser(username, password, first_name, last_name) {
     await pool.query('INSERT INTO users (username, password, first_name, last_name, membership_active) VALUES ($1, $2, $3, $4, $5);', [username, password, first_name, last_name, false])
 }
 
+async function validateMembership(id) {
+    await pool.query('UPDATE users SET membership_active = true WHERE id = $1', [id])
+}
+
 module.exports = {
     getUser,
     addUser,
-    getMessages
+    getMessages,
+    validateMembership
 }

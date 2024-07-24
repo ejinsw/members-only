@@ -675,10 +675,6 @@ video {
   z-index: 50;
 }
 
-.col-span-3 {
-  grid-column: span 3 / span 3;
-}
-
 .col-span-1 {
   grid-column: span 1 / span 1;
 }
@@ -749,9 +745,14 @@ video {
   margin-right: auto;
 }
 
-.mx-2 {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.mx-8 {
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 
 .mb-1 {
@@ -766,6 +767,10 @@ video {
   margin-left: 0.25rem;
 }
 
+.mt-12 {
+  margin-top: 3rem;
+}
+
 .mt-2 {
   margin-top: 0.5rem;
 }
@@ -776,10 +781,6 @@ video {
 
 .mt-8 {
   margin-top: 2rem;
-}
-
-.mt-12 {
-  margin-top: 3rem;
 }
 
 .box-border {
@@ -906,6 +907,10 @@ video {
   width: 3rem;
 }
 
+.w-3\/4 {
+  width: 75%;
+}
+
 .w-64 {
   width: 16rem;
 }
@@ -929,14 +934,6 @@ video {
 
 .w-full {
   width: 100%;
-}
-
-.w-32 {
-  width: 8rem;
-}
-
-.w-3\/4 {
-  width: 75%;
 }
 
 .max-w-7xl {
@@ -1469,6 +1466,10 @@ video {
   justify-items: stretch;
 }
 
+.gap-1 {
+  gap: 0.25rem;
+}
+
 .gap-4 {
   gap: 1rem;
 }
@@ -1955,6 +1956,11 @@ video {
   background-color: rgb(248 250 252 / var(--tw-bg-opacity));
 }
 
+.bg-slate-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(100 116 139 / var(--tw-bg-opacity));
+}
+
 .bg-slate-700 {
   --tw-bg-opacity: 1;
   background-color: rgb(51 65 85 / var(--tw-bg-opacity));
@@ -1963,11 +1969,6 @@ video {
 .bg-slate-800 {
   --tw-bg-opacity: 1;
   background-color: rgb(30 41 59 / var(--tw-bg-opacity));
-}
-
-.bg-slate-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(100 116 139 / var(--tw-bg-opacity));
 }
 
 .decoration-slice {
@@ -2084,8 +2085,8 @@ video {
   padding: 1rem;
 }
 
-.p-8 {
-  padding: 2rem;
+.p-2 {
+  padding: 0.5rem;
 }
 
 .px-1 {
@@ -2209,6 +2210,10 @@ video {
 
 .font-semibold {
   font-weight: 600;
+}
+
+.font-thin {
+  font-weight: 100;
 }
 
 .uppercase {
@@ -2746,6 +2751,10 @@ video {
   font-weight: 700;
 }
 
+.hover\:font-normal:hover {
+  font-weight: 400;
+}
+
 .before\:hover\:text-center:hover::before {
   content: var(--tw-content);
   text-align: center;
@@ -2794,10 +2803,6 @@ video {
   .md\:rounded-xl {
     border-radius: 0.75rem;
   }
-}
-
-.rtl\:grid:where([dir="rtl"], [dir="rtl"] *) {
-  display: grid;
 }
 
 @media (prefers-color-scheme: dark) {

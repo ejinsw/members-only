@@ -1,29 +1,38 @@
-<div class="flex flex-col justify-center items-center w-full h-full">
+<form action="" method="post">
+  <div class="flex flex-col justify-center items-center w-full h-full">
+
     <div class="w-64 flex flex-col px-4 py-8 rounded-lg mt-12 bg-slate-500 gap-4">
-        <form action="" method="post" class="w-full flex justify-center">
-            <input type="text" name="code" id="code" class="w-3/4 text-slate-800 font-bold px-2 py-1 rounded-lg text-center pointer-events-none" readonly/>
-        </form>
-        
-        <div class="grid grid-cols-3 grid-rows-4 rtl w-full">
-            <% for (let i=9; i >= 0; i--) { %>
-                <button class="<%= i === 0 ? " col-start-2 col-span-1" : "" %> hover:font-bold"
-                    onclick="addToInput('<%= i.toString() %>')"
-                    ><%= i.toString() %></button>
-                <% } %>
-            <button class="col-start-1 col-span-1 row-start-4 hover:font-bold" onclick="delFromInput()">Del</button>
-        </div>
+      <div class="w-full flex flex-col justify-center items-center">
+        <input type="text" name="code" id="code" class="w-3/4 text-slate-800 font-bold px-2 py-1 rounded-lg text-center pointer-events-none" readonly />
+        <% if (inputWrongCode) { %>
+        <span class="text-red-500">Wrong code!</span>
+        <% } %>
+      </div>
+
+      <div class="grid grid-cols-3 grid-rows-4 rtl w-full gap-1">
+        <% for (let i=9; i >= 0; i--) { %>
+        <button class="<%= i === 0 ? " col-start-2 col-span-1" : "" %> hover:font-bold" 
+          onclick="addToInput('<%= i.toString() %>')"
+          type="button" ><%= i.toString() %></button>
+        <% } %>
+        <button class="col-start-1 col-span-1 row-start-4 hover:font-bold" onclick="delFromInput()">⌫</button>
+      </div>
+
+      <button type="submit" class="hover:font-bold">Enter</button>
     </div>
-</div>
+  </div>
+</form>
 
 <script>
-    function addToInput(value) {
-      const input = document.getElementById('code');
-      if (input.value.length < 4)
+  function addToInput(value) {
+    const input = document.getElementById('code');
+    if (input.value.length < 4)
       input.value += value;
-    }
-    function delFromInput() {
-        const input = document.getElementById('code');
-        if (input.value.length - 1 >= 0)
-            input.value = input.value.substr(0, input.value.length - 1)
-    }
+  }
+
+  function delFromInput() {
+    const input = document.getElementById('code');
+    if (input.value.length - 1 >= 0)
+      input.value = input.value.substr(0, input.value.length - 1)
+  }
 </script>

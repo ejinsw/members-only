@@ -2,10 +2,14 @@ var express = require('express');
 const { body, validationResult } = require('express-validator')
 var router = express.Router();
 const controller = require('../controllers/controller')
-const queries = require('../db/queries')
+const queries = require('../config/db/queries')
 
 /* GET home page. */
 router.get('/', controller.home);
+
+router.get('/log-in', controller.getLogin)
+
+router.post('/log-in', controller.postLogin)
 
 router.get('/sign-up', controller.getSignUp)
 
@@ -24,6 +28,7 @@ router.post('/sign-up',
     if (!errors.isEmpty()) {
       return res.render('index', {
         title: 'Sign Up',
+        signedIn: req.user,
         content: 'signup',
         errors: errors.array(),
         data: req.body
@@ -33,8 +38,9 @@ router.post('/sign-up',
   },
   controller.postSignUp)
 
-router.get('/code', (req, res, next) => {
-  res.render('index', {title: 'Enter Code', content: 'code'})
-})
+router.get('/code', controller.getCode)
+router.post('/code', controller.postCode)
+
+router.get('/log-out', controller.getLogout)
 
 module.exports = router;

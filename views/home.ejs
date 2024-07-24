@@ -1,4 +1,4 @@
-<div class="h-full w-full flex p-4 overflow-auto">
+<div class="h-full w-full flex p-4 overflow-auto items-center">
   <% if (!messages || messages.length === 0) { %>
   <p>No messages yet...</p>
   <% } else { %> <% for (let i = 0; i < messages.length; i++) { %>
@@ -6,4 +6,8 @@
     <p><%= messages[i].content %></p>
   </div>
   <% } %> <% } %>
+
+  <% if (signedIn) { %>
+    <button class="bg-slate-50 px-4 py-1 mx-8 text-slate-800 rounded-xl">+</button>
+  <% } %>
 </div>
